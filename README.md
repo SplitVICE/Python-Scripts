@@ -15,7 +15,7 @@ Keep a website hosted in Heroku with free plan. The script will prevent the webs
 Download all your repositories by setting their names and your username.
 
 ## This Person Does Not Exists AutoSaver
-Saves generated pictures of https://thispersondoesnotexist.com/ website. TODO: Needs to be updated with a better solution by accessing directly API and using curl technology
+Saves generated pictures of https://thispersondoesnotexist.com/ website.
 
 ## List Here
 Shows onto console the names of all files and directories in current directory.

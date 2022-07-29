@@ -1,59 +1,22 @@
-# pynput module required. Run the this command to install:
-# python -m pip install pynput
-
-# Simulate Key Presses in Python tutorial video:
-# https://youtu.be/DTnz8wA6wpw
-
-# Full documentation of pynput module.
-# https://pynput.readthedocs.io/en/latest/keyboard.html?highlight=f5#pynput.keyboard.Key.f1
-
-# Go to https://thispersondoesnotexist.com/image
-# Run the script and click the website where the image is being displayed
-# Close terminal to stop script
-
-print('Script will start save loop in 5 seconds.')
-
-from pynput.keyboard import Key, Controller
+# Version 2.
+import os
+import uuid
 import time
 
-saved_images_counter = 0
+# How many images to download.
+download_count = 2
+# Adds to the name. Shows on console how many images have been downloaded.
+img_counter = 0
+# Delay between downloading images in seconds.
+delay_in_seconds = 5
 
-keyboard = Controller()
-
-time.sleep(5) # 5 seconds delay for user to click on the website
-
-print('Script initiated')
-
-def simulate_ctrl_s():
-    # Simulates CTRL + S .
-    keyboard.press(Key.ctrl)
-    keyboard.press('s')
-    keyboard.release(Key.ctrl)
-    keyboard.release("s")
-
-def simulate_enter():
-    # Simulates Enter (saving the image).
-    keyboard.press(Key.enter)
-    keyboard.release(Key.enter)
-
-def simulate_f5():
-    # Simulates F5. Website refresh to show new image
-    keyboard.press(Key.f5)
-    keyboard.release(Key.f5)
-
-# Infinite loop to save images
-while True:
-    simulate_ctrl_s()
-
-    time.sleep(1)
-
-    simulate_enter()
-
-    saved_images_counter += 1
-    print('Images saved: ' + str(saved_images_counter))
-
-    time.sleep(1)
-
-    simulate_f5()
-
-    time.sleep(1)
+while img_counter < download_count:
+    # Shell command that downloads the image. Uses img_counter and
+    # UUID to prevent repeated names.
+    # Example: 0_c15fa2cf-2aea-4e85-9ce1-4f394140537f.jpg
+    os.system("curl -o " + str(img_counter) + "_" + str(uuid.uuid4()) +
+              ".jpg https://thispersondoesnotexist.com/image")
+    # Delay before downloading a new image.
+    time.sleep(delay_in_seconds)
+    # Counter raised.
+    img_counter = img_counter + 1
